@@ -15,6 +15,9 @@ class CameraScreen(Screen):
     def stop(self):
         print("E>")
 
+    def capture(self):
+        print("[E>")
+
 
 class ImageScreen(Screen):
 
