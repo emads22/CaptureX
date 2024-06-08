@@ -1,4 +1,4 @@
-<FirstScreen>:
+<CameraScreen>:
     GridLayout:
         cols: 1
         padding: 10
@@ -12,12 +12,18 @@
             id: start_btn
             size_hint_y: 0.1
             text: 'Start'
+            on_press: root.start()
         Button:
             id: capture_btn
             size_hint_y: 0.1
             text: 'Capture'
+            on_press: root.stop()
 
 <RootWidget>:
-    FirstScreen:
-        id: first_screen
-        name: 'first_screen'
+    CameraScreen:
+        id: camera_screen
+        name: 'camera_screen'
+
+    ImageScreen:
+        id: image_screen
+        name: 'image_screen'

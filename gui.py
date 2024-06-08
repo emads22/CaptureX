@@ -7,9 +7,25 @@ from constants import KIVY_FILE
 Builder.load_file(str(KIVY_FILE))
 
 
-class FirstScreen(Screen):
-    def sla(self):
+class CameraScreen(Screen):
+
+    def start(self):
         print("EMAD")
+
+    def stop(self):
+        print("E>")
+
+
+class ImageScreen(Screen):
+
+    def create_link(self):
+        pass
+
+    def copy(self):
+        pass
+
+    def open(self):
+        pass
 
 
 class RootWidget(ScreenManager):
