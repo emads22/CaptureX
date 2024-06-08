@@ -4,14 +4,16 @@
         padding: 10
         spacing: 10
 
-        Image:
-            id: img_stream
+        Camera:
+            id: camera
             size_hint_y: 0.8
+            resolution: (640, 480)
+            play: False
         Button:
             id: start_btn
             size_hint_y: 0.1
             text: 'Start Camera'
-            on_press: root.start()
+            on_press: root.start() if root.ids.camera.play == False else root.stop()
         Button:
             id: capture_btn
             size_hint_y: 0.1
