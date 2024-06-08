@@ -1,3 +1,4 @@
+filestack-python==3.5.0
 Kivy==2.3.0
 opencv-python==4.10.0.82
 python-dotenv==1.0.1

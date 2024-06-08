@@ -1,11 +1,14 @@
 import cv2
 import time
+import webbrowser
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 from kivy.clock import Clock
 from kivy.graphics.texture import Texture
+from kivy.core.clipboard import Clipboard
 from app_utils import get_droidcam_url
+from classes import FileShare
 from constants import KIVY_FILE, NO_IMAGE_FILE, CAPTURED_IMAGES
 
 Builder.load_file(str(KIVY_FILE))
@@ -13,12 +16,16 @@ Builder.load_file(str(KIVY_FILE))
 
 class CameraScreen(Screen):
 
-    def on_kv_post(self, base_widget):
-        """Initialize variables after kv file is loaded."""
-        self.ids.img_stream.source = str(NO_IMAGE_FILE)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.video = None
         self.frame = None
         self.started = False
+        self.captured_img_path = None
+
+    def on_kv_post(self, base_widget):
+        """Initialize variables after kv file is loaded."""
+        self.ids.img_stream.source = str(NO_IMAGE_FILE)
 
     def start(self):
         """Start or stop the video feed."""
@@ -72,7 +79,7 @@ class CameraScreen(Screen):
         """Convert an OpenCV frame to a Kivy texture."""
         if self.frame is None:
             return None
-        
+
         # Flip the frame vertically
         self.frame = cv2.flip(self.frame, 0)
 
@@ -92,23 +99,43 @@ class CameraScreen(Screen):
         """Capture an image."""
         if self.frame is not None:
             current_time = time.strftime("%Y%m%d_%H%M%S")
-            img_captured_path = CAPTURED_IMAGES / f'{current_time}.png'
-            CAPTURED_IMAGES.mkdir(parents=True, exist_ok=True)  # Ensure the directory exists
-            self.ids.img_stream.export_to_png(str(img_captured_path))
+            self.captured_img_path = str(CAPTURED_IMAGES / f'{current_time}.png')
+            # Ensure the directory exists
+            CAPTURED_IMAGES.mkdir(parents=True, exist_ok=True)
+            self.ids.img_stream.export_to_png(self.captured_img_path)
 
             # # Alternatively, we can use: cv2.imwrite()
-            # cv2.imwrite(str(img_captured_path), self.frame)
+            # cv2.imwrite(str(captured_img_path), self.frame)
+
+            self.manager.current = "image_screen"
+
+            self.manager.current_screen.ids.image.source = self.captured_img_path
 
 
 class ImageScreen(Screen):
+
+    link_message = "Create the image link first"
+
     def create_link(self):
-        pass
+        img_path = App.get_running_app().root.ids.camera_screen.captured_img_path
+        
+        fileshare = FileShare(filepath=img_path)
 
-    def copy(self):
-        pass
+        self.cap_img_url = fileshare.share()
+        
+        self.ids.link_label.text = self.cap_img_url
 
-    def open(self):
-        pass
+    def copy_link(self):
+        try:
+            Clipboard.copy(self.cap_img_url)
+        except:
+            self.ids.link_label.text = self.link_message
+
+    def open(self):        
+        try:
+            webbrowser.open(self.cap_img_url)
+        except:
+            self.ids.link_label.text = self.link_message
 
 
 class RootWidget(ScreenManager):

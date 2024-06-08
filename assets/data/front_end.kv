@@ -26,27 +26,34 @@
 
         Image:
             id: image
-            size_hint_y: 0.65
+            size_hint_y: 0.6
             source: 'assets/images/not_available.jpg'
         Button:
             id: create_link_btn
             size_hint_y: 0.1
-            text: 'Create'
+            text: 'Create Shareable Link'
             on_press: root.create_link()
         Label:
             id: link_label
-            size_hint_y: 0.05
+            size_hint_y: 0.1
             text: ''
-        Button:
-            id: copy_btn
-            size_hint_y: 0.1
-            text: 'Copy'
-            on_press: root.copy()
-        Button:
-            id: open_btn
-            size_hint_y: 0.1
-            text: 'Open'
-            on_press: root.open()
+        GridLayout:
+            cols: 2
+            padding: 10
+            spacing: 10
+
+            Button:
+                id: copy_btn
+                size_hint_x: 0.5
+                size_hint_y: 0.1
+                text: 'Copy Link'
+                on_press: root.copy_link()
+            Button:
+                id: open_btn
+                size_hint_x: 0.5
+                size_hint_y: 0.1
+                text: 'Open Link'
+                on_press: root.open()
 
 
 <RootWidget>:
