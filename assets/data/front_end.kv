@@ -1,0 +1,23 @@
+<FirstScreen>:
+    GridLayout:
+        cols: 1
+        padding: 10
+        spacing: 10
+
+        Image:
+            id: image
+            size_hint_y: 0.8
+            source: 'assets/images/not_available.jpg'
+        Button:
+            id: start_btn
+            size_hint_y: 0.1
+            text: 'Start'
+        Button:
+            id: capture_btn
+            size_hint_y: 0.1
+            text: 'Capture'
+
+<RootWidget>:
+    FirstScreen:
+        id: first_screen
+        name: 'first_screen'
