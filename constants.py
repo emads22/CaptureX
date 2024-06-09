@@ -8,7 +8,7 @@ load_dotenv()
 # Get the IP address and port number of the DroidCam server from environment variables
 DROIDCAM_IP_ADDRESS = os.getenv('DROIDCAM_IP_ADDRESS')
 DROIDCAM_PORT_NUMBER = os.getenv('DROIDCAM_PORT_NUMBER')
-DROIDCAM_URL = os.getenv('DROIDCAM_URL')
+DROIDCAM_URL = f"http://{DROIDCAM_IP_ADDRESS}:{DROIDCAM_PORT_NUMBER}/video"
 
 FILESTACK_API_KEY = os.getenv('FILESTACK_API_KEY')
 

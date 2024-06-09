@@ -122,7 +122,9 @@ class CameraScreen(Screen):
 
     def capture(self):
         """Capture an image."""
-        if self.frame is not None:
+        # Check if a frame is available and if the image stream is currently visible
+        if self.frame is not None and self.ids.img_stream.opacity == 1:
+
             # Get the current time to use as part of the image filename
             current_time = time.strftime("%Y%m%d_%H%M%S")
 

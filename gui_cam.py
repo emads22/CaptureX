@@ -36,8 +36,9 @@ class CameraScreen(Screen):
 
     def capture(self):
         """Capture an image."""
-        # Check if the camera feed is available
-        if self.ids.camera._camera.texture:
+        # Check if the camera feed is available and if the camera widget is currently visible
+        if self.ids.camera._camera.texture and self.ids.camera.opacity == 1:
+
             # Generate a filename based on current time for the captured image
             current_time = time.strftime("%Y%m%d_%H%M%S")
             self.captured_img_path = str(
