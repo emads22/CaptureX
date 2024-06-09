@@ -1,6 +1,6 @@
 <CameraScreen>:
-    GridLayout:
-        cols: 1
+    BoxLayout:
+        orientation: 'vertical'
         padding: 10
         spacing: 10
 
@@ -9,56 +9,90 @@
             size_hint_y: 0.8
             resolution: (640, 480)
             play: False
+            opacity: 0
         Button:
             id: start_btn
             size_hint_y: 0.1
             text: 'Start Camera'
+            font_size: 40
+            bold: True
             on_press: root.start() if root.ids.camera.play == False else root.stop()
+            background_normal: 'assets/styles/purple.png'
+            background_down: 'assets/styles/yellow_mustard.png'
         Button:
             id: capture_btn
             size_hint_y: 0.1
             text: 'Capture'
+            font_size: 40
+            bold: True
             on_press: root.capture()
+            background_normal: 'assets/styles/purple.png'
+            background_down: 'assets/styles/yellow_mustard.png'
 
 <ImageScreen>:
-    GridLayout:
-        cols: 1
+    BoxLayout:
+        orientation: 'vertical'
         padding: 10
         spacing: 10
 
         Image:
             id: image
-            size_hint_y: 0.6
-            source: 'assets/images/not_available.jpg'
+            size_hint_y: 0.7
         Button:
             id: create_link_btn
             size_hint_y: 0.1
             text: 'Create Shareable Link'
+            font_size: 30
+            bold: True
             on_press: root.create_link()
+            background_normal: 'assets/styles/purple.png'
+            background_down: 'assets/styles/yellow_mustard.png'
         Label:
             id: link_label
             size_hint_y: 0.1
             text: ''
+            font_size: 25
+            bold: True
         GridLayout:
-            cols: 2
+            cols: 3
+            size_hint_y: 0.1
             padding: 10
             spacing: 10
 
             Button:
                 id: copy_btn
-                size_hint_x: 0.5
-                size_hint_y: 0.1
                 text: 'Copy Link'
+                font_size: 30
+                bold: True
+                size_hint_x: 0.45
                 on_press: root.copy_link()
+                background_normal: 'assets/styles/purple.png'
+                background_down: 'assets/styles/yellow_mustard.png'
+            Button:
+                id: home_btn   
+                on_press: root.go_home()  
+                size_hint_x: 0.05
+                background_normal: 'assets/styles/home.png'
+                background_down: 'assets/styles/home.png'
             Button:
                 id: open_btn
-                size_hint_x: 0.5
-                size_hint_y: 0.1
                 text: 'Open Link'
-                on_press: root.open()
+                font_size: 30
+                bold: True
+                on_press: root.open_link()
+                size_hint_x: 0.45
+                background_normal: 'assets/styles/purple.png'
+                background_down: 'assets/styles/yellow_mustard.png'
 
 
 <RootWidget>:
+    canvas.before:
+        Color:
+            rgba: (38/255, 53/255, 93/255, 1)  # Define the background color as (38, 53, 93)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
     CameraScreen:
         id: camera_screen
         name: 'camera_screen'
