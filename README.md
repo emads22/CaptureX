@@ -10,6 +10,13 @@ CaptureX is a Kivy application designed for capturing images using either an ext
 - **Open Image Link**: Open the shareable image link in the default web browser.
 - **Home Navigation**: Navigate back to the camera feed screen.
 
+## Technologies Used
+- **filestack-python**: A library for integrating with the Filestack file handling service.
+- **Kivy**: An open-source Python framework for developing multitouch applications.
+- **opencv-python**: A library for computer vision and image processing.
+- **python-dotenv**: A library for managing environment variables in .env files.
+- **webbrowser**: A module for displaying web-based documents.
+
 ## Setup
 1. Clone the repository.
 2. Ensure Python 3.x is installed.
