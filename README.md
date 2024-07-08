@@ -1,5 +1,7 @@
 # CaptureX: A Flexible Image Capture and Sharing App
 
+![CaptureX_logo](./assets/images/CaptureX_logo.png)
+
 ## Overview
 CaptureX is a Kivy application designed for capturing images using either an external webcam connected via IP or the computer's built-in camera. It provides functionalities for starting and stopping the camera feed, capturing images, and sharing captured images through shareable links. Built using the Kivy framework, the application offers a user-friendly interface that allows users to interact seamlessly with the camera feed and captured images.
 
